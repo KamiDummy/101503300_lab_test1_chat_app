@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Chat App</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-light">
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Login</h3>
+            <form id="login-form">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <p class="text-center mt-3">
+              Don't have an account? <a href="/signup.html">Sign Up</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script>
+    $('#login-form').on('submit', function(e) {
+      e.preventDefault();
+
+      var data = {
+        username: $('#username').val(),
+        password: $('#password').val()
+      };
+
+      fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(res) {
+        return res.json().then(function(body) {
+          return { status: res.status, body: body };
+        });
+      }).then(function(result) {
+        if (result.status === 200) {
+          localStorage.setItem('chat_username', result.body.username);
+          localStorage.setItem('chat_firstname', result.body.firstname);
+          localStorage.setItem('chat_lastname', result.body.lastname);
+          window.location.href = '/chat.html';
+        } else {
+          alert(result.body.error);
+        }
+      }).catch(function() {
+        alert('Something went wrong');
+      });
+    });
+  </script>
+</body>
+</html>
