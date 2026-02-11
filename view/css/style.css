@@ -1,0 +1,15 @@
+body {
+  overflow: hidden;
+}
+
+#messages-area {
+  background-color: #f8f9fa;
+}
+
+#room-list .list-group-item {
+  cursor: pointer;
+}
+
+#typing-indicator {
+  font-style: italic;
+}
