@@ -1,0 +1,15 @@
+{
+  "name": "101503300_lab_test1_chat_app",
+  "version": "1.0.0",
+  "description": "Real-time chat application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.3",
+    "socket.io": "^4.7.2"
+  }
+}
